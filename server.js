@@ -10,8 +10,20 @@ dotenv.config();
 
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:8080',
+    'http://localhost:3000',
+    'https://01fe23bcs377-ai-recruitment-frontend.vercel.app',
+    'https://ai-recruitment-frontend.vercel.app'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(logger); // Request logging
 

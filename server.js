@@ -15,8 +15,10 @@ const corsOptions = {
   origin: [
     'http://localhost:8080',
     'http://localhost:3000',
+    'http://127.0.0.1:8080',
     'https://01fe23bcs377-ai-recruitment-frontend.vercel.app',
-    'https://ai-recruitment-frontend.vercel.app'
+    'https://ai-recruitment-frontend.vercel.app',
+    'https://ai-recruitment-frontend-rid4.vercel.app'
   ],
   credentials: true,
   optionsSuccessStatus: 200

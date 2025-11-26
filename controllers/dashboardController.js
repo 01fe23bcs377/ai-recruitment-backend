@@ -31,6 +31,9 @@ exports.getDashboardStats = async (req, res) => {
             .limit(5)
             .select('name email skills matchScore education');
             
+        // Generate trend data for the last 4 weeks
+        const trendData = generateTrendData();
+            
         // Recent activity (mock data)
         const recentActivity = [
             {
@@ -61,6 +64,7 @@ exports.getDashboardStats = async (req, res) => {
                 recentCandidates,
                 avgMatchScore
             },
+            trendData, // Add trend data to response
             topCandidates,
             recentActivity
         });
@@ -69,3 +73,29 @@ exports.getDashboardStats = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
+// Helper function to generate mock trend data
+function generateTrendData() {
+    const weeks = [];
+    const scores = [];
+    
+    // Generate data for the last 4 weeks
+    for (let i = 3; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - (i * 7));
+        
+        // Format date as "Week of MM/DD"
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        weeks.push(`Week of ${month}/${day}`);
+        
+        // Generate a random match score between 70 and 95
+        const score = Math.floor(Math.random() * 25) + 70;
+        scores.push(score);
+    }
+    
+    return {
+        labels: weeks,
+        data: scores
+    };
+}
